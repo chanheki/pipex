@@ -13,10 +13,14 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+/* include header */
 # include <stdlib.h>
 # include <unistd.h>
 
-/* libft*/
+/* gnl define */
+# define BUFFER_SIZE 42
+
+/* libft func */
 int			ft_abs(int n);
 int			ft_atoi(const char *str);
 long long	ft_atoll(const char *str);
@@ -56,7 +60,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
 
-/* gnl */
+/* gnl func */
 char		*get_next_line(int fd);
 
 #endif
