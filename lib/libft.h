@@ -17,8 +17,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-/* gnl define */
+/* gnl */
 # define BUFFER_SIZE 42
+
+typedef enum e_line
+{
+	NO_NEW_LINE	= -1
+}	t_line;
 
 /* libft func */
 int			ft_abs(int n);
