@@ -6,7 +6,7 @@
 /*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:25:55 by chanheki          #+#    #+#             */
-/*   Updated: 2023/01/19 22:26:04 by chanheki         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:03:13 by chanheki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ char	*find_path(char *cmd, char **envp)
 void	execute(char *argv, char **envp)
 {
 	char	**cmd;
-	int		i;
 	char	*path;
+	int		i;
 
-	i = -1;
 	cmd = ft_split(argv, ' ');
 	path = find_path(cmd[0], envp);
+	i = -1;
 	if (!path)
 	{
 		while (cmd[++i])
