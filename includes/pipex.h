@@ -12,8 +12,8 @@
 
 typedef enum e_status
 {
-	CHILD_PROCESS = 0,
-	PARENT_PROCESS = 1,
+	PARENT_PROCESS = 0,
+	CHILD_PROCESS = 1
 }	t_status;
 
 /* process handler */
