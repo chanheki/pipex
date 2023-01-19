@@ -46,6 +46,8 @@ RED = \033[31m
 sources1 :=	
 
 sources1 += ft_mandatory/pipex_main.c
+sources1 += ft_mandatory/pipex_utils.c
+sources1 += ft_mandatory/process_handler.c
 
 # ---- Bonus ---- #
 
