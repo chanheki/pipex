@@ -14,9 +14,9 @@ int main(int argc, char **argv, char **envp)
 	if (pid < 0)
 		error_exitor("fork error");
 	if (pid == 0)
-		process_handler(argv, envp, fd, CHILD_PROCESS); // child logic
+		process_handler(argv, envp, fd, CHILD_PROCESS);
 	if (waitpid(pid, NULL, 0) == -1)
 		error_exitor("waitpid error");
-	process_handler(argv, envp, fd, PARENT_PROCESS); // parent logic
+	process_handler(argv, envp, fd, PARENT_PROCESS);
 	return (0);
 }
