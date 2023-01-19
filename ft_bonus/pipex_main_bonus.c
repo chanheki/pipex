@@ -1,5 +1,5 @@
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 int main(int argc, char **argv)
 {
