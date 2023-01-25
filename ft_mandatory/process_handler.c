@@ -19,9 +19,9 @@ static void	process_child(char **argv, char **envp, int *fd)
 	infile = open(argv[1], O_RDONLY, 0777);
 	if (infile < 0)
 		error_exitor("infile error");
-	dup2(fd[1], STDOUT_FILENO);
-	dup2(infile, STDIN_FILENO);
 	close(fd[0]);
+	dup2(infile, STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
 	execute(argv[2], envp);
 }
 
@@ -32,9 +32,9 @@ static void	process_parent(char **argv, char **envp, int *fd)
 	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile < 0)
 		error_exitor("outfile error");
+	close(fd[1]);
 	dup2(fd[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
-	close(fd[1]);
 	execute(argv[3], envp);
 }
 
