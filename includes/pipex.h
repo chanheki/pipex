@@ -33,11 +33,21 @@ typedef struct s_info
 	char	**envp;
 	pid_t	pid;
 	int		fd[2];
+	int		infile;
+	int		outfile;
 }	t_info;
 
+typedef enum e_input
+{
+	ERROR = 0,
+	HERE_DOC = 1,
+	INFILE = 2
+}	t_input;
+
 /* pipex init */
-void pipex_init(t_info *info, int argc, char **argv, char **envp);
-void pipex_validator(t_info *info);
+void	pipex_init(t_info *info, int argc, char **argv, char **envp);
+t_input	pipex_validator(t_info *info);
+
 /* process handler bonus */
 void	process_handler_bonus(char **argv, char **envp, int *fd, int count);
 
