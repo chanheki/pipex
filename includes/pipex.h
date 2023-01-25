@@ -10,6 +10,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+/* mandatory */
 typedef enum e_status
 {
 	PARENT_PROCESS = 0,
@@ -23,5 +24,24 @@ void	process_handler(char **argv, char **envp, int *fd, t_status status);
 void	error_exitor(char *error_msg);
 char	*find_path(char *cmd, char **envp);
 void	execute(char *argv, char **envp);
+
+/* bonus */
+typedef struct s_info
+{
+	int		argc;
+	char	**argv;
+	char	**envp;
+	pid_t	pid;
+	int		fd[2];
+}	t_info;
+
+/* pipex init */
+void pipex_init(t_info *info, int argc, char **argv, char **envp);
+void pipex_validator(t_info *info);
+/* process handler bonus */
+void	process_handler_bonus(char **argv, char **envp, int *fd, int count);
+
+/* utils bonus */
+void	here_doc(const char *limiter, t_info *info);
 
 #endif
