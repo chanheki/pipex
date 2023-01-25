@@ -54,6 +54,9 @@ sources1 += ft_mandatory/process_handler.c
 sources2 :=	
 
 sources2 += ft_bonus/pipex_main_bonus.c
+sources2 += ft_mandatory/pipex_utils.c
+sources2 += ft_bonus/pipex_utils_bonus.c
+sources2 += ft_bonus/process_handler_bonus.c
 
 # ---- Elements ---- #
 
