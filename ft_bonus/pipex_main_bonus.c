@@ -6,7 +6,7 @@
 /*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 21:56:04 by chanheki          #+#    #+#             */
-/*   Updated: 2023/01/19 23:32:41 by chanheki         ###   ########.fr       */
+/*   Updated: 2023/01/25 19:52:27 by chanheki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,12 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	info;
-	int		count;
 
 	pipex_init(&info, argc, argv, envp);
-	pipex_validator(&info);
-	count = 1;
-	while (count != argc)
+	if (pipex_validator(&info) == HERE_DOC)
 	{
-		if (pipe(info.fd) == -1)
-			error_exitor("pipe error");
-		info.pid = fork();
-		if (info.pid < 0)
-			error_exitor("fork error");
-		if (info.pid == 0)
-			process_handler_bonus(argv, envp, info.fd, count);
-		if (waitpid(info.pid, NULL, 0) == -1)
-			error_exitor("waitpid error");
-		count ++;
+		info.infile = file_checker(info.argv, HERE_DOC);
+		here_doc(info.argv[2], &info);
 	}
-	process_handler_bonus(argv, envp, info.fd, count);
 	return (0);
 }
