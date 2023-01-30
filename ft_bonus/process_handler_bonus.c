@@ -43,3 +43,27 @@ void	process_handler_bonus(char **argv, char **envp, int *fd, int count)
 	(void) count;
 	process_child(argv, envp, fd);
 }
+
+void	child_process(char *argv, char **envp)
+{
+	pid_t	pid;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+		error_exitor("pipe error");
+	pid = fork();
+	if (pid == -1)
+		error_exitor("pid error");
+	if (pid == 0)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		execute(argv, envp);
+	}
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		waitpid(pid, NULL, 0);
+	}
+}
