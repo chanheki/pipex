@@ -74,16 +74,16 @@ void	here_doc(const char *limiter, t_info *info)
 	}
 }
 
-int	file_cheker(char *argv, t_input i)
+int	file_checker(char *argv, t_input i)
 {
 	int	file;
 
 	file = 0;
 	if (i == HERE_DOC)
 		file = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	else if (i == 1)
+	else if (i == INFILE)
 		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	else if (i == 2)
+	else if (i == OUTFILE)
 		file = open(argv, O_WRONLY, 0777);
 	if (file == -1)
 		error_exitor("file check error");
