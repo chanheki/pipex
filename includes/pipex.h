@@ -41,7 +41,8 @@ typedef enum e_input
 {
 	ERROR = 0,
 	HERE_DOC = 1,
-	INFILE = 2
+	INFILE = 2,
+	OUTFILE = 3
 }	t_input;
 
 /* pipex init */
@@ -53,5 +54,7 @@ void	process_handler_bonus(char **argv, char **envp, int *fd, int count);
 
 /* utils bonus */
 void	here_doc(const char *limiter, t_info *info);
+int		file_checker(char *argv, t_input i);
+void	child_process(char *argv, char **envp);
 
 #endif
