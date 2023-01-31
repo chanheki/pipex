@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/31 15:54:05 by chanheki          #+#    #+#             */
+/*   Updated: 2023/01/31 19:59:52 by chanheki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
@@ -35,6 +46,7 @@ typedef struct s_info
 	int		fd[2];
 	int		infile;
 	int		outfile;
+	int		argv_index;
 }	t_info;
 
 typedef enum e_input
@@ -55,6 +67,6 @@ void	process_handler_bonus(char **argv, char **envp, int *fd, int count);
 /* utils bonus */
 void	here_doc(const char *limiter, t_info *info);
 int		file_checker(char *argv, t_input i);
-void	child_process(char *argv, char **envp);
+void	execute_process(char *argv, char **envp);
 
 #endif
