@@ -30,8 +30,8 @@ int	main(int argc, char **argv, char **envp)
 		info.outfile = file_checker(info.argv[argc - 1], OUTFILE);
 		dup2(info.infile, STDIN_FILENO);
 	}
-	while (i < argc - 2)
-		execute_process(argv[i++], envp);
+	while (info.argv_index < argc - 2)
+		execute_process(argv[info.argv_index++], envp);
 	dup2(info.outfile, STDOUT_FILENO);
 	execute(argv[argc - 2], envp);
 	return (0);
