@@ -6,7 +6,7 @@
 /*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 18:54:18 by chanheki          #+#    #+#             */
-/*   Updated: 2023/01/31 21:43:15 by chanheki         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:18:50 by chanheki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int	file_checker(char *argv, t_input i)
 	file = 0;
 	if (i == HERE_DOC)
 		file = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	else if (i == INFILE)
-		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	else if (i == OUTFILE)
+		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	else if (i == INFILE)
 		file = open(argv, O_WRONLY, 0777);
 	if (file == -1)
 		error_exitor("file check error");
