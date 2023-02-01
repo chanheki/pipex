@@ -72,7 +72,7 @@ void	here_doc(const char *limiter, t_info *info)
 	{
 		close(info->fd[1]);
 		dup2(info->fd[0], STDIN_FILENO);
-		wait(NULL);
+		waitpid(info->pid, NULL, WNOHANG);
 	}
 }
 
