@@ -21,15 +21,10 @@ int	main(int argc, char **argv, char **envp)
 	if (info.status == HERE_DOC)
 	{
 		here_doc(&info);
-		info.infile = file_checker(info.argv[1], INFILE);
-		info.outfile = file_checker(info.argv[argc - 1], HERE_DOC);
+		process_input_output(&info, HERE_DOC);
 	}
 	else if (info.status == INFILE)
-	{
-		info.infile = file_checker(info.argv[1], INFILE);
-		info.outfile = file_checker(info.argv[argc - 1], OUTFILE);
-		dup2(info.infile, STDIN_FILENO);
-	}
+		process_input_output(&info, OUTFILE);
 	else
 		error_exitor("status error");
 	while (info.argv_index < argc - 2)
