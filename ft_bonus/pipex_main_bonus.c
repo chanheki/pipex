@@ -29,6 +29,6 @@ int	main(int argc, char **argv, char **envp)
 		error_exitor("status error");
 	while (info.argv_index < argc - 2)
 		execute_process(&info, info.argv[info.argv_index++], envp);
-	last_process(&info, info.argv[info.argc - 2], envp);
+	last_process(&info, info.argc - 2, envp);
 	return (0);
 }
