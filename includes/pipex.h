@@ -48,9 +48,9 @@ void	execute(char *argv, char **envp);
 typedef enum e_input
 {
 	ERROR = 0,
-	HERE_DOC = 1,
+	HERE_DOC = 3,
 	INFILE = 2,
-	OUTFILE = 3
+	OUTFILE = 1
 }	t_input;
 
 typedef struct s_info
@@ -74,10 +74,9 @@ t_input	pipex_validator(t_info *info);
 void	process_handler_bonus(char **argv, char **envp, int *fd, int count);
 
 /* utils bonus */
-// void	here_doc(const char *limiter, t_info *info);
 void	here_doc(t_info *info);
 int		file_checker(char *argv, t_input i);
 void	execute_process(t_info *info, char *argv, char **envp);
-void	last_process(t_info *info, char *argv, char **envp);
-
+void	last_process(t_info *info, int index, char **envp);
+void	process_input_output(t_info *info,t_input input);
 #endif
