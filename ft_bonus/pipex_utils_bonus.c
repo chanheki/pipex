@@ -48,41 +48,12 @@ t_input	pipex_validator(t_info *info)
 	return (INFILE);
 }
 
-// static void	here_doc_compare(const char *line, const char *limiter)
-// {
-// 	if (!ft_strncmp(line, limiter, ft_strlen(limiter))
-// 		&& ft_strlen(line) == ft_strlen(limiter) + 1)
-// 		exit(EXIT_SUCCESS);
-// }
-
-// void	here_doc(const char *limiter, t_info *info)
-// {
-// 	char	*line;
-
-// 	info->argv_index = 3;
-// 	if (pipe(info->fd) == -1)
-// 		error_exitor("here_doc pipe error");
-// 	info->pid = fork();
-// 	if (info->pid == CHILD_PROCESS)
-// 	{
-// 		close(info->fd[FD_READ]);
-// 		line = get_next_line(STDIN_FILENO);
-// 		while (line)
-// 		{
-// 			here_doc_compare(line, limiter);
-// 			write(info->fd[FD_WRITE], line, ft_strlen(line));
-// 			line = get_next_line(STDIN_FILENO);
-// 		}
-// 		free(line);
-// 	}
-// 	else
-// 	{
-// 		dup2(info->fd[FD_READ], STDIN_FILENO);
-// 		close(info->fd[FD_WRITE]);
-// 		close(info->fd[FD_READ]);
-// 		waitpid(info->pid, NULL, WNOWAIT);
-// 	}
-// }
+void	process_input_output(t_info *info,t_input input)
+{
+	info->infile = file_checker(info->argv[1], INFILE);
+	info->outfile = file_checker(info->argv[info->argc - 1], input);
+	dup2(info->infile, STDIN_FILENO);
+}
 
 void	here_doc(t_info *info)
 {
