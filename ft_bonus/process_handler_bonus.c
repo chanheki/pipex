@@ -6,7 +6,7 @@
 /*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:25:51 by chanheki          #+#    #+#             */
-/*   Updated: 2023/02/01 20:49:15 by chanheki         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:25:22 by chanheki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,49 @@ void	execute_process(t_info *info, char *argv, char **envp)
 		error_exitor("pid error");
 	if (pid == 0)
 	{
-		close(info->fd[0]);
-		dup2(info->fd[1], STDOUT_FILENO);
+		if (dup2(info->fd[FD_WRITE], STDOUT_FILENO) < 0)
+			error_exitor("dup2 fd write error");
+		if (close(info->fd[FD_READ]) < 0)
+			error_exitor("close fd read error");
 		execute(argv, envp);
 	}
 	else
 	{
-		close(info->fd[1]);
-		dup2(info->fd[0], STDIN_FILENO);
-		waitpid(pid, NULL, WNOHANG);
+		if (dup2(info->fd[FD_READ], STDIN_FILENO) < 0)
+			error_exitor("dup2 fd read error");
+		if (close(info->fd[FD_WRITE]) < 0)
+			error_exitor("close fd write error");
+		if (close(info->fd[FD_READ]) < 0)
+			error_exitor("close fd read error");
+		waitpid(pid, NULL, WNOWAIT);
 	}
+}
+
+void	last_process(t_info *info, char *argv, char **envp)
+{
+	pid_t	pid;
+
+	if (pipe(info->fd) == -1)
+		error_exitor("pipe error");
+	pid = fork();
+	if (pid == -1)
+		error_exitor("pid error");
+	if (pid == 0)
+	{
+		if (close(info->fd[FD_READ]) < 0)
+			error_exitor("close fd read error");
+		if (dup2(info->outfile, STDOUT_FILENO) < 0)
+			error_exitor("dup2 fd outfile error");
+		execute(argv, envp);
+	}
+	else
+	{
+		if (close(info->fd[FD_WRITE]) < 0)
+			error_exitor("close fd write error");
+		if (close(info->fd[FD_READ]) < 0)
+			error_exitor("close fd read error");
+		waitpid(pid, NULL, WNOWAIT);
+	}
+	if (info->status == HERE_DOC)
+		unlink(info->argv[1]);
 }
