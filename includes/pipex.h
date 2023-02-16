@@ -6,7 +6,7 @@
 /*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:54:05 by chanheki          #+#    #+#             */
-/*   Updated: 2023/02/07 20:02:19 by chanheki         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:42:10 by chanheki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,14 @@ typedef struct s_info
 	t_input	status;
 }	t_info;
 
-/* pipex init */
-void	pipex_init(t_info *info, int argc, char **argv, char **envp);
-t_input	pipex_validator(t_info *info);
-
 /* process handler bonus */
-void	process_handler_bonus(char **argv, char **envp, int *fd, int count);
-
-/* utils bonus */
-void	here_doc(t_info *info);
-int		file_checker(char *argv, t_input i);
 void	execute_process(t_info *info, char *argv, char **envp);
 void	last_process(t_info *info, int index, char **envp);
-void	process_input_output(t_info *info,t_input input);
+
+/* utils bonus */
+void	pipex_init(t_info *info, int argc, char **argv, char **envp);
+t_input	pipex_validator(t_info *info);
+void	process_input_output(t_info *info, t_input input);
+void	here_doc(t_info *info);
+int		file_checker(char *argv, t_input i);
 #endif
