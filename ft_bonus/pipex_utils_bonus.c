@@ -6,7 +6,7 @@
 /*   By: chanheki <chanheki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 18:54:18 by chanheki          #+#    #+#             */
-/*   Updated: 2023/02/07 20:32:49 by chanheki         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:22:51 by chanheki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_input	pipex_validator(t_info *info)
 	return (INFILE);
 }
 
-void	process_input_output(t_info *info,t_input input)
+void	process_input_output(t_info *info, t_input input)
 {
 	info->infile = file_checker(info->argv[1], INFILE);
 	info->outfile = file_checker(info->argv[info->argc - 1], input);
